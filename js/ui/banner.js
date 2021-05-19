@@ -3,7 +3,7 @@
  * @author YunYouJun <me@yunyoujun.cn>
  * @description https://github.com/YunYouJun/hexo-theme-yun
  */
-
+//魔改by VcollX
 
 /**
  * 生成介于 min 与 max 之间的随机数
@@ -55,6 +55,16 @@ function generateBanner(title) {
   // set animation name
   lineTop.style.animationName = "extend-line";
   lineBottom.style.animationName = "extend-line";
+  // set subtitle
+  let subBox = document.createElement("div");
+  subBox.innerHTML = "<span class='subtitle'>" + "客官，要进来喝杯咖啡吗？(๑¯∀¯๑)" + "</span>";
+  subBox.classList.add("subtitle-move");
+  subBox.style.animationName = "wula";
+  subBox.style.position = "absolute";
+  subBox.style.right = "26vw";
+  subBox.style.bottom = "40vh";
+  banner.insertBefore(subBox, lineBottom);
+  
 }
 
 /**
