@@ -245,7 +245,7 @@ body::before {
   display: flex;
   background-color: var(--banner-line-color);
   width: 0;
-  height: 10px;
+  height: 2px;
   animation-duration: 0.4s;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in;
@@ -276,7 +276,7 @@ body::before {
 }
 .char-left {
   border-top: 0 solid var(--banner-line-color);
-  border-bottom: 0px solid rgba(0,120,231,0.1);
+  border-bottom: 0px solid rgba(0,120,231,0);
   border-bottom-width: 0px;
   animation-duration: 0.4s;
   animation-delay: 0.4s;
@@ -284,7 +284,7 @@ body::before {
   animation-timing-function: ease-out;
 }
 .char-right {
-  border-bottom: 0px solid rgba(0,120,231,0.1);
+  border-bottom: 0px solid rgba(0,120,231,0);
   border-top: 0 solid var(--banner-line-color);
   border-top-width: 0px;
   animation-duration: 0.4s;
