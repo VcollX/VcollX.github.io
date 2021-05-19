@@ -292,6 +292,25 @@ body::before {
   animation-fill-mode: forwards;
   animation-timing-function: ease-out;
 }
+.subtitle {
+  font-family: 'Songti SC', 'Noto Serif SC', STZhongsong, STKaiti, KaiTi, Roboto, serif;
+  font-size: 150%;
+  font-weight: normal;
+  background-color: rgba(255,255,255,0);
+  line-height: 1;
+  display: flex;
+  color: var(--banner-char-color);
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-delay: 0s;
+}
+.subtitle-move {
+  opacity: 0;
+  animation-duration: 0.4s;
+  animation-delay: 0.4s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
 .cloud {
   display: flex;
   width: 100%;
@@ -543,6 +562,38 @@ body::before {
   to {
     opacity: 1;
     border-top-width: var(--banner-empty-border-size, var(--banner-char-size));
+  }
+}
+@-moz-keyframes wula {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes wula {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-o-keyframes wula {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes wula {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 #footer {
