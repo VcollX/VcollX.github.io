@@ -57,7 +57,7 @@ function generateBanner(title) {
   lineBottom.style.animationName = "extend-line";
   // set subtitle
   let subBox = document.createElement("div");
-  subBox.innerHTML = "<span class='subtitle'>" + "客官，要进来喝杯咖啡吗？(๑¯∀¯๑)" + "</span>";
+  subBox.innerHTML = "<span class='subtitle'>" + "客人，要进来喝杯咖啡吗？(๑¯∀¯๑)" + "</span>";
   subBox.classList.add("subtitle-move");
   subBox.style.animationName = "wula";
   subBox.style.position = "absolute";
