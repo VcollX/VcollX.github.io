@@ -1,0 +1,436 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="Vcoll"><meta name="copyright" content="Vcoll"><meta name="generator" content="Hexo 5.4.0"><meta name="theme" content="hexo-theme-yun"><title>【小项目】银山打字通 | Vcoll的咖啡屋</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.24/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_j5gk85dg4pf.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/coffee.svg"><link rel="mask-icon" href="/coffee.svg" color="#0078E7"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"example.com","root":"/","title":["Vcoll的咖啡屋"],"version":"1.6.1","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();</script><meta name="description" content="前言 一场为了争夺打印机而开展的战争。  正片说到打字软件嘛，大家第一个想到的一定是耳熟能详的“金山打字通”。为了让大家能快速的记住我们程序的名字，我们决定起一个简单而又不那么高调的名字————银山打字通！ 首先，是程序的设计思路图 在实际的开发工作中，我们尽量使用了模块化的编程，将需要用到的功能以函数的形式封装，需要时调用即可。同时还极大地增加了main函数的可读性 关于程序美观性我们为程序设计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【小项目】银山打字通">
+<meta property="og:url" content="http://example.com/2021/11/23/%E9%93%B6%E5%B1%B1%E6%89%93%E5%AD%97%E9%80%9A/">
+<meta property="og:site_name" content="Vcoll的咖啡屋">
+<meta property="og:description" content="前言 一场为了争夺打印机而开展的战争。  正片说到打字软件嘛，大家第一个想到的一定是耳熟能详的“金山打字通”。为了让大家能快速的记住我们程序的名字，我们决定起一个简单而又不那么高调的名字————银山打字通！ 首先，是程序的设计思路图 在实际的开发工作中，我们尽量使用了模块化的编程，将需要用到的功能以函数的形式封装，需要时调用即可。同时还极大地增加了main函数的可读性 关于程序美观性我们为程序设计">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/11/23/%E9%93%B6%E5%B1%B1%E6%89%93%E5%AD%97%E9%80%9A/1.png">
+<meta property="article:published_time" content="2021-11-23T05:48:38.000Z">
+<meta property="article:modified_time" content="2021-11-23T12:55:58.671Z">
+<meta property="article:author" content="Vcoll">
+<meta property="article:tag" content="c++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/11/23/%E9%93%B6%E5%B1%B1%E6%89%93%E5%AD%97%E9%80%9A/1.png"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="Vcoll"><img width="96" loading="lazy" src="https://cdn.jsdelivr.net/gh/VcollX/VcollX.github.io/images/mywife.png" alt="Vcoll"><span class="site-author-status" title="摸鱼ing~">♥</span></a><div class="site-author-name"><a href="/about/">Vcoll</a></div><span class="site-name">Vcoll的咖啡屋</span><sub class="site-subtitle">摸鱼ing~</sub><div class="site-desciption">这是一位兴趣使然的店长</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">8</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">5</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">16</span></a></div><a class="site-state-item hty-icon-button" target="_blank" rel="noopener" href="https://buuoj.cn/" title="看累了就去刷题"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-edit-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/VcollX" title="GitHub" target="_blank" style="color:#6e5494"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E7%89%87"><span class="toc-number">2.</span> <span class="toc-text">正片</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.1.</span> <span class="toc-text">关于程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BE%8E%E8%A7%82%E6%80%A7"><span class="toc-number">2.1.1.</span> <span class="toc-text">美观性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%A3%E5%91%B3%E6%80%A7"><span class="toc-number">2.1.2.</span> <span class="toc-text">趣味性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8B%E5%A5%BD%E6%80%A7"><span class="toc-number">2.1.3.</span> <span class="toc-text">友好性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E4%BB%A3%E7%A0%81"><span class="toc-number">2.2.</span> <span class="toc-text">关于代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E8%AF%BB%E6%80%A7"><span class="toc-number">2.2.1.</span> <span class="toc-text">可读性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E6%80%A7"><span class="toc-number">2.2.2.</span> <span class="toc-text">复杂性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%81%A5%E5%A3%AE%E6%80%A7"><span class="toc-number">2.2.3.</span> <span class="toc-text">健壮性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8C%E6%88%90%E5%BA%A6"><span class="toc-number">2.2.4.</span> <span class="toc-text">完成度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%80%A7"><span class="toc-number">2.2.5.</span> <span class="toc-text">技术性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E6%96%B0%E6%80%A7"><span class="toc-number">2.2.6.</span> <span class="toc-text">创新性</span></a></li></ol></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="http://example.com/2021/11/23/%E9%93%B6%E5%B1%B1%E6%89%93%E5%AD%97%E9%80%9A/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Vcoll"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="Vcoll的咖啡屋"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">【小项目】银山打字通</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2021-11-23 13:48:38" itemprop="dateCreated datePublished" datetime="2021-11-23T13:48:38+08:00">2021-11-23</time></div><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">杂七杂八的学习笔记</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/c/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">c++</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>一场为了争夺打印机而开展的战争。</p>
+</blockquote>
+<h2 id="正片"><a href="#正片" class="headerlink" title="正片"></a>正片</h2><p>说到打字软件嘛，大家第一个想到的一定是耳熟能详的“金山打字通”。为了让大家能快速的记住我们程序的名字，我们决定起一个简单而又不那么高调的名字————银山打字通！</p>
+<p>首先，是程序的设计思路图<br><img src="/2021/11/23/%E9%93%B6%E5%B1%B1%E6%89%93%E5%AD%97%E9%80%9A/1.png" alt="1" loading="lazy"></p>
+<p>在实际的开发工作中，我们尽量使用了模块化的编程，将需要用到的功能以函数的形式封装，需要时调用即可。<br>同时还极大地增加了main函数的可读性</p>
+<h3 id="关于程序"><a href="#关于程序" class="headerlink" title="关于程序"></a>关于程序</h3><h4 id="美观性"><a href="#美观性" class="headerlink" title="美观性"></a>美观性</h4><p>我们为程序设计了清晰明了的菜单界面，调用即可，非常方便。<br>每个模块中集成了输入检测功能，成功执行则会返回所需功能的数字代号。</p>
+<p>以主菜单为例展现设计思路</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">Menu</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">char</span> mode<span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"----------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                 银山打字通                 |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                    v2.0                    |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                vc++6.0特供版               |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|               made by VcollX               |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                                            |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                 1.开始游戏                 |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                 2.使用说明                 |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                 3.退出游戏                 |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                                            |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|Tip：按下对应编号使用功能                   |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"----------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	mode <span class="token operator">=</span> <span class="token function">getch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token string">'0'</span> <span class="token operator">&lt;</span> mode <span class="token operator">&amp;&amp;</span> mode <span class="token operator">&lt;</span> <span class="token string">'4'</span><span class="token punctuation">)</span> <span class="token keyword">return</span> mode <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+		<span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"非法输入，请重试(＞__＜)\r"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		mode <span class="token operator">=</span> <span class="token function">getch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span> 
+</code></pre>
+
+<h4 id="趣味性"><a href="#趣味性" class="headerlink" title="趣味性"></a>趣味性</h4><p>在各个界面采用了颜文字！！！在枯燥的练习后让自己的身心得到治愈！！！</p>
+<h4 id="友好性"><a href="#友好性" class="headerlink" title="友好性"></a>友好性</h4><p>银山打字通别名猴子都会用的打字程序<br>加入了规则界面并严格限制了输入，每个界面中都带有操作提示！<br>路径的输入直接拖动程序即可，甚至做了不需要直接输入的自动模式用以简化操作！</p>
+<h3 id="关于代码"><a href="#关于代码" class="headerlink" title="关于代码"></a>关于代码</h3><h4 id="可读性"><a href="#可读性" class="headerlink" title="可读性"></a>可读性</h4><p>利用模块化的思路，并在关键地方写明了详细的注释，降低了代码的阅读难度<br>模块的排版根据调用的先后顺序排版，方便程序员寻找</p>
+<h4 id="复杂性"><a href="#复杂性" class="headerlink" title="复杂性"></a>复杂性</h4><p>对于菜单的调用都是线性思路并且时间大部分取决于用户的操作时间，所以几乎能忽略不计<br>重点是游戏实现的主逻辑</p>
+<p>这是一个相对完备的逻辑，在循环中每次只读入50个字符进数组中（防止文章太长然后内存爆炸）<br>进行一次预处理后再按位比较输入与读入的字符，同时完成正确率的计算。<br>因为也是注重于与用户的交互，所以程序运行时间也可以忽略不计。<br><del>硬要讲的话线性阶的时间复杂度是O（n）</del></p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+		<span class="token function">ReadFile</span><span class="token punctuation">(</span>handle<span class="token punctuation">,</span><span class="token operator">&amp;</span>ch<span class="token punctuation">,</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>RealRead<span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">//读取文件 </span>
+		ErrorID <span class="token operator">=</span> <span class="token function">GetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>ErrorID <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>                                     <span class="token comment">//判断是否正常读取 </span>
+		<span class="token punctuation">&#123;</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"文件读取失败(＞﹏＜)，错误码：%hd\n"</span><span class="token punctuation">,</span>ErrorID<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		len <span class="token operator">=</span> <span class="token function">strlen</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>len <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> 
+		<span class="token punctuation">&#123;</span>
+			<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|退出成功！（=￣ω￣=）|"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">return</span> <span class="token number">2</span><span class="token punctuation">;</span> 
+		<span class="token punctuation">&#125;</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>                           <span class="token comment">//清除文本中的换行符和休止符 </span>
+		<span class="token punctuation">&#123;</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span>ch<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">10</span> <span class="token operator">||</span> ch<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">13</span><span class="token punctuation">)</span> ch<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">' '</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span>ch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span>j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>j <span class="token operator">&lt;</span> len<span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>                            <span class="token comment">//打字游戏主逻辑 </span>
+		<span class="token punctuation">&#123;</span>
+			read <span class="token operator">=</span> <span class="token function">getch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span>read <span class="token operator">==</span> ch<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> 
+			<span class="token punctuation">&#123;</span>
+				<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c"</span><span class="token punctuation">,</span>read<span class="token punctuation">)</span><span class="token punctuation">;</span>
+				AText<span class="token operator">++</span><span class="token punctuation">;</span>
+			<span class="token punctuation">&#125;</span>
+			<span class="token keyword">else</span> 
+			<span class="token punctuation">&#123;</span>
+				j<span class="token operator">--</span><span class="token punctuation">;</span>
+				<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\a"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+				WText<span class="token operator">++</span><span class="token punctuation">;</span>
+				AText<span class="token operator">++</span><span class="token punctuation">;</span>
+			<span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+		<span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"cls"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>len <span class="token operator">!=</span> <span class="token number">50</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token function">memset</span><span class="token punctuation">(</span>ch<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                         <span class="token comment">//记得清空数组不然会出bug </span>
+    <span class="token punctuation">&#125;</span></code></pre>
+<h4 id="健壮性"><a href="#健壮性" class="headerlink" title="健壮性"></a>健壮性</h4><p>这也是本程序最引以为傲的一点，我们在一切能输入的地方都做了输入检测！<br>有效防止用户所导致的程序崩溃。</p>
+<p>一些例子：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token string">'0'</span> <span class="token operator">&lt;</span> mode <span class="token operator">&amp;&amp;</span> mode <span class="token operator">&lt;</span> <span class="token string">'4'</span><span class="token punctuation">)</span> <span class="token keyword">return</span> mode <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+<span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"非法输入，请重试(＞__＜)\r"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">GetFileAttributes</span><span class="token punctuation">(</span>FilePath<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+<span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"文件不存在或无法访问，请重试！(＞__＜)\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+
+<h4 id="完成度"><a href="#完成度" class="headerlink" title="完成度"></a>完成度</h4><p>完美符合题目要求！！！</p>
+<h4 id="技术性"><a href="#技术性" class="headerlink" title="技术性"></a>技术性</h4><p>（一）大量运用了winapi<br>    windows api的好处：<br>    1.在出错时能返回错误代码，方便程序维护和查错<br>    2.移植性高，在遇到不同架构或版本的电脑时，只要是windows系统winapi会自动调节适应</p>
+<p>（二）开发过程中的新思路和解决方案<br>1.因为是模块化的编程思路，在程序运行中关闭异常运行的程序要如何解决想了很久<br>最后决定在main函数中使用一个flag变量标记程序状态，如果异常在完成一次循环时就退出程序</p>
+<p>2.为了防止程序内存溢出，运用了程序打开文件的文件指针机制，让文件一部分一部分地读入，有效避免了大文件导致内存爆炸的问题。</p>
+<p>3.在自动模式的列表选择界面实现退出功能时又遇到了问题，虽然可以直接靠增加函数模块解决，但是为了增加程序速度与稳定性，我们决定在初始化时就创建一个退出专用文件，让它迅速跑完并返回特定值达到了返回菜单的目的<br>（一开始用的是空文件，但是后面想了想可以靠存特定哈希的方式增强稳定性，但是已经交了就懒得改了）</p>
+<h4 id="创新性"><a href="#创新性" class="headerlink" title="创新性"></a>创新性</h4><p>1.超级无敌可爱的颜文字！<br>2.猴子也会用的自动模式！<br>3.独具开创性的解决方案！</p>
+<p>以下附上源码供学习参考</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;conio.h></span>      <span class="token comment">//getch()</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;time.h></span>       <span class="token comment">//time</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;stdio.h></span>      </span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;string.h></span>     <span class="token comment">//str相关 </span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;direct.h></span>     <span class="token comment">//mkdir()</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;windows.h></span>    <span class="token comment">//win api</span></span>
+
+WIN32_FIND_DATA Fileinfo<span class="token punctuation">[</span><span class="token number">25</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>     <span class="token comment">//使用WIN32API结构体 ，25个表示最多支持25个练习文件 </span>
+time_t Start<span class="token punctuation">,</span>End<span class="token punctuation">;</span>
+
+<span class="token keyword">double</span> AText<span class="token punctuation">,</span>WText<span class="token punctuation">;</span>
+<span class="token keyword">long</span> hfile<span class="token punctuation">;</span><span class="token comment">//全局文件句柄 </span>
+
+<span class="token keyword">int</span> <span class="token function">Menu</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">char</span> mode<span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"----------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                 银山打字通                 |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                    v2.0                    |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                vc++6.0特供版               |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|               made by VcollX               |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                                            |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                 1.开始游戏                 |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                 2.使用说明                 |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                 3.退出游戏                 |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                                            |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|Tip：按下对应编号使用功能                   |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"----------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	mode <span class="token operator">=</span> <span class="token function">getch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token string">'0'</span> <span class="token operator">&lt;</span> mode <span class="token operator">&amp;&amp;</span> mode <span class="token operator">&lt;</span> <span class="token string">'4'</span><span class="token punctuation">)</span> <span class="token keyword">return</span> mode <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+		<span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"非法输入，请重试(＞__＜)\r"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		mode <span class="token operator">=</span> <span class="token function">getch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span> 
+
+<span class="token keyword">int</span> <span class="token function">NextMenu</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">char</span> mode<span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"----------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                 银山打字通                 |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                    v2.0                    |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                vc++6.0特供版               |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|               made by VcollX               |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                                            |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                 1.自动模式                 |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                 2.手动模式                 |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                 3.返回菜单                 |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                                            |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|Tip：按下对应编号使用功能                   |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"----------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	mode <span class="token operator">=</span> <span class="token function">getch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token string">'0'</span> <span class="token operator">&lt;</span> mode <span class="token operator">&amp;&amp;</span> mode <span class="token operator">&lt;</span> <span class="token string">'4'</span><span class="token punctuation">)</span> <span class="token keyword">return</span> mode <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+		<span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"非法输入，请重试(＞__＜)\r"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		mode <span class="token operator">=</span> <span class="token function">getch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">EdMenu</span><span class="token punctuation">(</span><span class="token keyword">double</span> rate<span class="token punctuation">,</span><span class="token keyword">int</span> time<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"----------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|               ***恭喜过关!***              |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                                            |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"|                正确率: %3.lf%%                |\n"</span><span class="token punctuation">,</span>rate<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"|                 速度：%4d秒               |\n"</span><span class="token punctuation">,</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                                            |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                                            |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                 o(*≧▽≦)ツ               |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                                            |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|                                            |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"| 按任意键返回菜单                           |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"----------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> <span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">Rules</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"cls"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"------------------------------------------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"| 手动模式：手动输入练习文件路径                                             |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"| 自动模式：将练习文件放入text文件夹中，程序会列出文件夹内的练习文件，选择编 |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"| 号以打开文件（第一次打开由程序自动创建text文件夹）                         |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"| 玩法说明：对照文本输入正确的字母！如果输入错误会发出叫声哦！               |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"| ps:(暂不支持中文练习)  实在是写不来啦！！！\\(Q A Q )/                      |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"| pss:只能用.txt文件作为练习哦！！！                                         |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"------------------------------------------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"\n---按下回车键返回---"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+	<span class="token function">getch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">CreatExitFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">long</span> hd<span class="token punctuation">;</span>
+	<span class="token keyword">char</span> ext<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">"exit"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>QuitAddr<span class="token punctuation">[</span>MAX_PATH<span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token function">GetCurrentDirectory</span><span class="token punctuation">(</span>MAX_PATH<span class="token punctuation">,</span>QuitAddr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">strcat</span><span class="token punctuation">(</span>QuitAddr<span class="token punctuation">,</span><span class="token string">"\\texts\\Exit.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	hd <span class="token operator">=</span> <span class="token function">CreateFile</span><span class="token punctuation">(</span>QuitAddr<span class="token punctuation">,</span>GENERIC_READ <span class="token operator">|</span> GENERIC_WRITE<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">,</span>OPEN_ALWAYS<span class="token punctuation">,</span>FILE_ATTRIBUTE_NORMAL<span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">CloseHandle</span><span class="token punctuation">(</span>hd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">SearchTexts</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span> PL<span class="token punctuation">)</span> <span class="token comment">//遍历文件夹下的文件 ，有就打印列表，没有就退出程序并返回总文件数 </span>
+<span class="token punctuation">&#123;</span>  
+	<span class="token keyword">long</span> handle<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> cont <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+	handle <span class="token operator">=</span> <span class="token function">FindFirstFile</span><span class="token punctuation">(</span>PL<span class="token punctuation">,</span><span class="token operator">&amp;</span>Fileinfo<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span>handle <span class="token operator">==</span> INVALID_HANDLE_VALUE<span class="token punctuation">)</span><span class="token comment">//没有文件就退出 </span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"未找到可用文件，请将练习文件置于本目录下的texts文件夹中"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span> 
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">else</span><span class="token comment">//有文件 </span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"-----------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"| 请选择需要练习的文件                        |"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"| 如需退出请选择Exit.txt快速返回菜单(=￣ω￣=)|"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"-----------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">" [1] %s\n"</span><span class="token punctuation">,</span>Fileinfo<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>cFileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span> 
+	<span class="token comment">//继续遍历输出文件列表 </span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">FindNextFile</span><span class="token punctuation">(</span>handle<span class="token punctuation">,</span><span class="token operator">&amp;</span>Fileinfo<span class="token punctuation">[</span>cont<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">" [%d] %s\n"</span><span class="token punctuation">,</span>cont<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>Fileinfo<span class="token punctuation">[</span>cont<span class="token punctuation">]</span><span class="token punctuation">.</span>cFileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		cont<span class="token operator">++</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token function">FindClose</span><span class="token punctuation">(</span>handle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> cont<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">long</span> <span class="token function">FileOpen</span><span class="token punctuation">(</span><span class="token keyword">char</span> addr<span class="token punctuation">[</span>MAX_PATH<span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment">//简单的打开文件函数，打开失败返回0和错误码，打开成功返回文件句柄 </span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">long</span> handle <span class="token operator">=</span> <span class="token function">CreateFile</span><span class="token punctuation">(</span>addr<span class="token punctuation">,</span>GENERIC_READ<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">,</span>OPEN_EXISTING<span class="token punctuation">,</span>FILE_ATTRIBUTE_NORMAL<span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	 
+	<span class="token keyword">if</span><span class="token punctuation">(</span>handle <span class="token operator">==</span> INVALID_HANDLE_VALUE<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		DWORD ErrorID <span class="token operator">=</span> <span class="token function">GetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"文件打开失败(＞﹏＜),错误码：%hd\n"</span><span class="token punctuation">,</span>ErrorID<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> handle<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">GameStart</span><span class="token punctuation">(</span><span class="token keyword">long</span> handle<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">char</span> ch<span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>read<span class="token punctuation">;</span>
+	DWORD RealRead <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>ErrorID<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> len<span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+		<span class="token function">ReadFile</span><span class="token punctuation">(</span>handle<span class="token punctuation">,</span><span class="token operator">&amp;</span>ch<span class="token punctuation">,</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>RealRead<span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">//读取文件 </span>
+		ErrorID <span class="token operator">=</span> <span class="token function">GetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>ErrorID <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>                                     <span class="token comment">//判断是否正常读取 </span>
+		<span class="token punctuation">&#123;</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"文件读取失败(＞﹏＜)，错误码：%hd\n"</span><span class="token punctuation">,</span>ErrorID<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		len <span class="token operator">=</span> <span class="token function">strlen</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>len <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> 
+		<span class="token punctuation">&#123;</span>
+			<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"|退出成功！（=￣ω￣=）|"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">return</span> <span class="token number">2</span><span class="token punctuation">;</span> 
+		<span class="token punctuation">&#125;</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>                           <span class="token comment">//清除文本中的换行符和休止符 </span>
+		<span class="token punctuation">&#123;</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span>ch<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">10</span> <span class="token operator">||</span> ch<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">13</span><span class="token punctuation">)</span> ch<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">' '</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span>ch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span>j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>j <span class="token operator">&lt;</span> len<span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>                            <span class="token comment">//打字游戏主逻辑 </span>
+		<span class="token punctuation">&#123;</span>
+			read <span class="token operator">=</span> <span class="token function">getch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span>read <span class="token operator">==</span> ch<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> 
+			<span class="token punctuation">&#123;</span>
+				<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c"</span><span class="token punctuation">,</span>read<span class="token punctuation">)</span><span class="token punctuation">;</span>
+				AText<span class="token operator">++</span><span class="token punctuation">;</span>
+			<span class="token punctuation">&#125;</span>
+			<span class="token keyword">else</span> 
+			<span class="token punctuation">&#123;</span>
+				j<span class="token operator">--</span><span class="token punctuation">;</span>
+				<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\a"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+				WText<span class="token operator">++</span><span class="token punctuation">;</span>
+				AText<span class="token operator">++</span><span class="token punctuation">;</span>
+			<span class="token punctuation">&#125;</span>	
+        <span class="token punctuation">&#125;</span>
+		<span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"cls"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>len <span class="token operator">!=</span> <span class="token number">50</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token function">memset</span><span class="token punctuation">(</span>ch<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                         <span class="token comment">//记得清空数组不然会出bug </span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">Star</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">//游戏主逻辑入口函数，正常运行返回1，异常返回0 </span>
+<span class="token punctuation">&#123;</span>
+		<span class="token keyword">int</span> IfError<span class="token punctuation">;</span>
+	<span class="token comment">//这俩变量计算正确率 </span>
+		WText <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+		AText <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+		<span class="token comment">//这段计算时间 </span>
+		
+		Start <span class="token operator">=</span> <span class="token function">time</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		IfError <span class="token operator">=</span> <span class="token function">GameStart</span><span class="token punctuation">(</span>hfile<span class="token punctuation">)</span><span class="token punctuation">;</span>              <span class="token comment">//开始游戏</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>IfError <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span> 					<span class="token comment">//程序异常则退出  </span>
+		
+		End <span class="token operator">=</span> <span class="token function">time</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">CloseHandle</span><span class="token punctuation">(</span>hfile<span class="token punctuation">)</span><span class="token punctuation">;</span>                           <span class="token comment">//关闭文件句柄 </span>
+		
+		<span class="token keyword">if</span><span class="token punctuation">(</span>IfError <span class="token operator">!=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token function">EdMenu</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token operator">-</span>WText<span class="token operator">/</span>AText<span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">,</span>End <span class="token operator">-</span> Start<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		<span class="token function">getch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+		<span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">char</span> Addr<span class="token punctuation">[</span>MAX_PATH<span class="token punctuation">]</span><span class="token punctuation">,</span>FileAddr<span class="token punctuation">[</span>MAX_PATH<span class="token punctuation">]</span><span class="token punctuation">;</span>	<span class="token comment">//检测是否存在texts文件夹，若没有则创建一个 </span>
+	<span class="token keyword">char</span><span class="token operator">*</span> PLADDR<span class="token punctuation">;</span>
+	<span class="token function">GetCurrentDirectory</span><span class="token punctuation">(</span>MAX_PATH<span class="token punctuation">,</span>Addr<span class="token punctuation">)</span><span class="token punctuation">;</span>					<span class="token comment">//获取当前程序工作目录 </span>
+	<span class="token function">strcat</span><span class="token punctuation">(</span>Addr<span class="token punctuation">,</span><span class="token string">"\\texts"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//Addr变为 工作目录\\texts</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">GetFileAttributes</span><span class="token punctuation">(</span>Addr<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> 
+		<span class="token function">mkdir</span><span class="token punctuation">(</span><span class="token string">"texts"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token function">strcat</span><span class="token punctuation">(</span>Addr<span class="token punctuation">,</span><span class="token string">"\\*.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	PLADDR <span class="token operator">=</span> Addr<span class="token punctuation">;</span>
+	<span class="token comment">//下面这段设置退出文件列表需要的组件 </span>
+	<span class="token function">CreatExitFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token comment">//设置命令窗口大小 </span>
+	<span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"mode con cols=113 lines=33"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token comment">//正式开始运行程序 </span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">int</span> flag <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span><span class="token comment">//flag = 1说明游戏进程正常，为0说明有问题，在主函数最后会退出</span>
+		<span class="token keyword">int</span> mode<span class="token punctuation">,</span>Tnum<span class="token punctuation">;</span>
+		<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+		<span class="token punctuation">&#123;</span>
+			<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+			<span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"cls"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">switch</span><span class="token punctuation">(</span><span class="token function">Menu</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+			<span class="token punctuation">&#123;</span>
+				<span class="token keyword">case</span> <span class="token number">3</span><span class="token operator">:</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+				<span class="token keyword">case</span> <span class="token number">1</span><span class="token operator">:</span> 
+					a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+					<span class="token keyword">break</span><span class="token punctuation">;</span>
+				<span class="token keyword">case</span> <span class="token number">2</span><span class="token operator">:</span> <span class="token function">Rules</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">&#125;</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span>a <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"cls"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		mode <span class="token operator">=</span> <span class="token function">NextMenu</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"cls"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>mode <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token comment">//自动模式 </span>
+		<span class="token punctuation">&#123;</span>
+			<span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token function">SearchTexts</span><span class="token punctuation">(</span>PLADDR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>sum<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>                         <span class="token comment">//寻找可用的练习文档，没找到则退出程序 </span>
+					
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"------------------------\n总文件数：%d\n"</span><span class="token punctuation">,</span>sum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"输入编号："</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+			
+			<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>Tnum<span class="token punctuation">)</span><span class="token punctuation">;</span>						<span class="token comment">//输入希望练习的文档编号 </span>
+			<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+			<span class="token punctuation">&#123;</span>
+				<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token number">0</span> <span class="token operator">&lt;</span> Tnum <span class="token operator">&amp;&amp;</span> Tnum <span class="token operator">&lt;=</span> sum <span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+				<span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"非法输入！请重试！(＞__＜)\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+				<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>Tnum<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+			<span class="token punctuation">&#125;</span>
+						
+			<span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"cls"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">GetCurrentDirectory</span><span class="token punctuation">(</span>MAX_PATH<span class="token punctuation">,</span>FileAddr<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">//设定文件路径并准备打开文件 </span>
+			<span class="token function">strcat</span><span class="token punctuation">(</span>FileAddr<span class="token punctuation">,</span><span class="token string">"\\texts\\"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">strcat</span><span class="token punctuation">(</span>FileAddr<span class="token punctuation">,</span>Fileinfo<span class="token punctuation">[</span>Tnum <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>cFileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			
+			hfile <span class="token operator">=</span> <span class="token function">FileOpen</span><span class="token punctuation">(</span>FileAddr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>hfile<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>                   <span class="token comment">//打开文件失败则退出 </span>
+			
+			flag <span class="token operator">=</span> <span class="token function">Star</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>mode <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token comment">//手动模式 </span>
+		<span class="token punctuation">&#123;</span>
+			<span class="token keyword">char</span> FilePath<span class="token punctuation">[</span>MAX_PATH<span class="token punctuation">]</span><span class="token punctuation">;</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"请输入文件路径：\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+			<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%s"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>FilePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+			<span class="token punctuation">&#123;</span>
+				<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">GetFileAttributes</span><span class="token punctuation">(</span>FilePath<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+				<span class="token keyword">else</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"文件不存在或无法访问，请重试！(＞__＜)\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+				<span class="token function">memset</span><span class="token punctuation">(</span>FilePath<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>FilePath<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+				<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%s"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>FilePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">&#125;</span>
+			<span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"cls"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			hfile <span class="token operator">=</span> <span class="token function">FileOpen</span><span class="token punctuation">(</span>FilePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>hfile<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+			
+			flag <span class="token operator">=</span> <span class="token function">Star</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>mode <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>
+		
+		<span class="token keyword">if</span><span class="token punctuation">(</span>flag <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">//如果不能正常开始游戏就退出 </span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>Vcoll</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="http://example.com/2021/11/23/%E9%93%B6%E5%B1%B1%E6%89%93%E5%AD%97%E9%80%9A/" title="【小项目】银山打字通">http://example.com/2021/11/23/%E9%93%B6%E5%B1%B1%E6%89%93%E5%AD%97%E9%80%9A/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2021/10/20/2020%E9%95%BF%E5%AE%89%E6%9D%AF%E5%8F%96%E8%AF%81%E6%80%9D%E8%B7%AF%E5%AD%A6%E4%B9%A0/" rel="next" title="2020长安杯取证思路学习"><span class="post-nav-text">2020长安杯取证思路学习</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>Thanks for watching!</span><br></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2021 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> Vcoll</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v5.4.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.6.1</span></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div></body></html>
